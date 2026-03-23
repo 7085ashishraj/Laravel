@@ -122,6 +122,7 @@ Route::get("/admin/product/home",function(){
 //Controllers, Blade and Advanced Routing
 
  use App\Http\Controllers\ProductController;
+use GuzzleHttp\Middleware;
 
  Route::get("/firstController", [ProductController::class, "index"]);
  Route::get("/aboutController", [ProductController::class, "about"]);
@@ -138,6 +139,15 @@ Route::get("/admin/product/home",function(){
  Route::get("country",function(){
     return view("country");
  });
+
+ //Group middleware
+//without registering middleware in app.php
+ use App\Http\Middleware\age_check;
+
+ Route::get("about",function(){
+    return "Welcome to authentication Page";
+ })->middleware(age_check::class);
+
 
 
 
