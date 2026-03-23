@@ -125,6 +125,19 @@ Route::get("/admin/product/home",function(){
 
  Route::get("/firstController", [ProductController::class, "index"]);
  Route::get("/aboutController", [ProductController::class, "about"]);
+ Route::get("/viewfile", [ProductController::class, "viewfile"]);
+
+ Route::get("course",function(){
+    return view("course");
+ });
+
+ Route::get("age",function(){
+    return view("age");
+ });
+
+ Route::get("country",function(){
+    return view("country");
+ });
 
 
 

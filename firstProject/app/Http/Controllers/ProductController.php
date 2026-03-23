@@ -13,4 +13,11 @@ class ProductController extends Controller
     function about(){
         return "This is a about page";
     }
+
+    function viewFile(){
+        $name = "Ashish";
+        $city = "Jalandhar";
+        $course = "Laravel";
+        return view ("data2", compact("name", "city", "course"));
+    }
 }
