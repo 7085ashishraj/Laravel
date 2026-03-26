@@ -148,6 +148,26 @@ use GuzzleHttp\Middleware;
     return "Welcome to authentication Page";
  })->middleware(age_check::class);
 
+ //getting Image at webPage
+ Route::get("getImage", function(){
+    return view("image");
+ });
+
+
+//Using Controller:-
+
+//  Route::get("studenthome", function(){
+//     $studentname = "Aditya";
+//     return view("studenthome", compact("studentname"));
+//  });
+
+use App\Http\Controllers\bladeController;
+//Route::get("studenthome",[bladeController::class, "index"]);
+//Route::get("aboutpage",[bladeController::class, "about"]);
+Route::get("aboutpage",[bladeController::class, "data"]);
+
+//route ->controller->blade
+
 
 
 
