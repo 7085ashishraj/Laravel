@@ -18,6 +18,13 @@ Route::get('/home', function(){
 //     return view('about'); localhost:8000/about/ashish
 // });
 
+//passing data to view
+
+Route::get("user/{id}", function($id){
+    return "User ID: " . $id;
+});
+
+
 Route::get('/about/{name}', function($name){
     return view('about', ['name'=>$name]);
 });
@@ -166,7 +173,68 @@ use App\Http\Controllers\bladeController;
 //Route::get("aboutpage",[bladeController::class, "about"]);
 Route::get("aboutpage",[bladeController::class, "data"]);
 
-//route ->controller->blade
+//route ->controller->blade(steps to pass data from route to blade file using controller)
+
+//Parameter Constraints
+Route::get("user/{id}", function($id){
+    return "User ID: " . $id;
+})->where("id", "[0-9]+");
+
+//for alphabets
+Route::get("user/{name}", function($name){
+    return "User Name: " . $name;
+})->where("name", "[A-Za-z]+");
+
+//for both
+Route::get("user/{name}/{id}", function($name, $id){
+    return "User Name: " . $name . " User ID: " . $id;
+})->where(["name" => "[A-Za-z]+", "id" => "[0-9]+"]);
+
+//Optional Parameters
+Route::get("profile/{name?}", function($name = "Guest"){
+    return "Profile Name: " . $name;
+});
+
+//Route Prefixes
+Route::prefix("admin")->group(function(){
+    Route::get("/dashboard", function(){
+        return "Admin Dashboard";
+    }); 
+    Route::get("/settings", function(){
+        return "Admin Settings";
+    });
+    Route::get("/users", function(){
+        return "Admin Users";
+    });
+});
+
+
+//Route group
+Route::group(["prefix" => "admin", "middleware" => age_check::class], function(){
+    Route::get("/dashboard", function(){
+        return "Admin Dashboard";
+    }); 
+    Route::get("/settings", function(){
+        return "Admin Settings";
+    });
+    Route::get("/users", function(){
+        return "Admin Users";
+    });
+});
+
+//Route Fallback
+Route::fallback(function(){
+    return "Page Not Found. Go Back to Home Page";
+});
+
+//Forms
+// Route::get("application", function(){
+//     return view("forms.application");
+// });
+
+use App\Http\Controllers\applicationController;
+Route::get("application", [applicationController::class, "index"]);
+Route::post("submit", [applicationController::class, "submit"]);
 
 
 
