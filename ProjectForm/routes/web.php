@@ -28,6 +28,11 @@ Route::get('/', function () {
 // });
 
 use App\Http\Controllers\userController;
-Route::get('/user', [userController::class, 'user']);
-Route::post('/submit', [userController::class, 'submit']);
+// Route::get('/user', [userController::class, 'user']);
+// Route::post('/submit', [userController::class, 'submit']);
+Route::get('/user1', [userController::class, 'user1']);
+Route::post('/inputdata', [userController::class, 'inputdata']);
+Route::get('/inputdata', function () {
+    return redirect('/user1');
+});
 
