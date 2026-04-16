@@ -36,3 +36,8 @@ Route::get('/inputdata', function () {
     return redirect('/user1');
 });
 
+use App\Http\Controllers\StudentController;
+Route::get('/students', [StudentController::class, 'show']);
+Route::post('/stdsubmit', [StudentController::class, 'store']);
+
+
