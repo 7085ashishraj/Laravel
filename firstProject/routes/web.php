@@ -236,6 +236,11 @@ use App\Http\Controllers\applicationController;
 Route::get("application", [applicationController::class, "index"]);
 Route::post("submit", [applicationController::class, "submit"]);
 
+use App\Http\Controllers\imageController;
+Route::get("file", [imageController::class, "show"]);
+Route::post("uploadimage", [imageController::class, "store"]);
+
+
 
 
 
