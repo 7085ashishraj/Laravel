@@ -241,6 +241,36 @@ Route::get("file", [imageController::class, "show"]);
 Route::post("uploadimage", [imageController::class, "store"]);
 
 
+//store cookie using form   
+Route::get("cookieform", function(){
+    return view("forms.cookieform");
+});
+Route::post("storecookie", function(Request $request){
+    $cookieValue1 = $request->username;
+    $cookieValue2= $request->password;
+    $cookieValue3 = $request->code;
+    return response("Cookie Set")->cookie("username", $cookieValue1, 60) 
+                                ->cookie("password", $cookieValue2, 60) 
+                                ->cookie("code", $cookieValue3, 60);
+});
+
+//get cookie values
+Route::get("getcookieform", function(Request $request){
+    $username = $request->cookie("username");
+    $password = $request->cookie("password");
+    $code = $request->cookie("code");
+    return view("forms.cookieform", compact('username', 'password', 'code'));
+});
+
+//delete cookies
+Route::get("deletecookieform", function(){
+    return response("Cookies Deleted")->cookie("username", null , -1)
+                                      ->cookie("password", null , -1)
+                                    ->cookie("code", null , -1);
+});
+
+
+
 
 
 
