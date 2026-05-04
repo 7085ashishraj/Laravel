@@ -222,10 +222,6 @@ Route::group(["prefix" => "admin", "middleware" => age_check::class], function()
     });
 });
 
-//Route Fallback
-Route::fallback(function(){
-    return "Page Not Found. Go Back to Home Page";
-});
 
 //Forms
 // Route::get("application", function(){
@@ -269,7 +265,11 @@ Route::get("deletecookieform", function(){
                                     ->cookie("code", null , -1);
 });
 
+use App\Http\Controllers\MailController;
+Route::get("sendemail", [MailController::class, "sendEmail"]);
 
+Route::get("show", [MailController::class, "show"]);
+Route::post("send", [MailController::class, "sendEmail"]);
 
 
 
